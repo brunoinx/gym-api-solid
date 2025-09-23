@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["Gympass"],
+  "cSpell.words": ["datasource", "Gympass", "sqlite"],
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "dbaeumer.vscode-eslint"
 }
