@@ -1,10 +1,5 @@
-import { taskRoutes } from 'routes/tasks';
 import { app } from './app';
 import { env } from './env';
-import dbPlugin from 'plugins/db';
-
-app.register(dbPlugin);
-app.register(taskRoutes);
 
 app
   .listen({
@@ -12,5 +7,5 @@ app
     port: env.PORT,
   })
   .then(() => {
-    console.log(`HTTP server running on http://localhost:${env.PORT}`);
+    console.log(`HTTP server running on http://localhost:${env.PORT} 🚀`);
   });
