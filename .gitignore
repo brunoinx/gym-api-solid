@@ -3,4 +3,5 @@ build
 .env
 .DS_Store
 
-db.sqlite
+prisma/dev.db
+client
