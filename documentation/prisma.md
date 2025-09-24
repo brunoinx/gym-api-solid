@@ -4,8 +4,6 @@
 
 # Prisma Client
 
-
-
 Estruturação das tabelas do banco de dados
 Identificar os relacionamentos entre cada tabela;
 Estudar sobre as estratégias de consulta e agrupamento;
