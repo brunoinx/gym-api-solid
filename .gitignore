@@ -3,5 +3,8 @@ build
 .env
 .DS_Store
 
+# Test
+coverage
+
 prisma/dev.db
 client
