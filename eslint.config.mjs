@@ -31,6 +31,7 @@ export default defineConfig([
       parser: tsParser,
     },
     rules: {
+      '@typescript-eslint/no-unused-expressions': 'warn',
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 0,
       '@typescript-eslint/no-empty-interface': 0,
@@ -55,8 +56,5 @@ export default defineConfig([
       sourceType: 'module',
     },
     plugins: ['@typescript-eslint', 'prettier'],
-    rules: {
-      'prettier/prettier': 'error',
-    },
   },
 ]);
