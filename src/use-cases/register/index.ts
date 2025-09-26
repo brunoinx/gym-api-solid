@@ -1,7 +1,17 @@
 import { hash } from 'bcryptjs';
-import { RegisterUserCaseRequest, RegisterUseCaseResponse } from 'types/registerRequestBody';
-import { UserAlreadyExistsError } from './errors/user-already-exists';
+import { User } from '@prisma/client';
 import { IUsersRepository } from 'repositories/IUsersRepository';
+import { UserAlreadyExistsError } from 'errors/user-already-exists';
+
+interface RegisterUserCaseRequest {
+  name: string;
+  email: string;
+  password: string;
+}
+
+interface RegisterUseCaseResponse {
+  user: User;
+}
 
 /**
  * Implement Dependency Inversion Principle - SOLID
