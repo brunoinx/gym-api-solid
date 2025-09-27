@@ -26,10 +26,10 @@ model CheckIn {
 
   // Foreign keys
   user_id String
-  gymId   String
+  gym_id  String
 
   user User @relation(fields: [user_id], references: [id])
-  gym  Gym  @relation(fields: [gymId], references: [id])
+  gym  Gym  @relation(fields: [gym_id], references: [id])
 
   @@map("check_ins")
 }
