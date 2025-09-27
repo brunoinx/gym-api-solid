@@ -3,6 +3,7 @@ import { RegisterUseCase } from './index.js';
 import { compare } from 'bcryptjs';
 import { InMemoryUsersRepository } from 'repositories/in-memory-users-repository.js';
 import { UserAlreadyExistsError } from 'errors/user-already-exists.js';
+import { beforeEach } from 'node:test';
 
 const userRegisterData = {
   name: 'John Doe',
@@ -10,21 +11,23 @@ const userRegisterData = {
   password: '123456',
 };
 
-describe('Register Use Case', () => {
-  it('should be able to register', async () => {
-    const usersRepository = new InMemoryUsersRepository();
-    const registerUserCase = new RegisterUseCase(usersRepository);
+let usersRepository: InMemoryUsersRepository;
+let sut: RegisterUseCase;
 
-    const { user } = await registerUserCase.execute(userRegisterData);
+describe('Register Use Case', () => {
+  beforeEach(() => {
+    usersRepository = new InMemoryUsersRepository();
+    sut = new RegisterUseCase(usersRepository);
+  });
+
+  it('should be able to register', async () => {
+    const { user } = await sut.execute(userRegisterData);
 
     expect(user.id).toEqual(expect.any(String));
   });
 
   it('should hash user password upon registration', async () => {
-    const usersRepository = new InMemoryUsersRepository();
-    const registerUserCase = new RegisterUseCase(usersRepository);
-
-    const { user } = await registerUserCase.execute(userRegisterData);
+    const { user } = await sut.execute(userRegisterData);
 
     const isPasswordCorrectlyHashed = await compare('123456', user.password_hash);
 
@@ -32,13 +35,10 @@ describe('Register Use Case', () => {
   });
 
   it('should not be able to register with same email', async () => {
-    const usersRepository = new InMemoryUsersRepository();
-    const registerUserCase = new RegisterUseCase(usersRepository);
-
-    await registerUserCase.execute(userRegisterData);
+    await sut.execute(userRegisterData);
 
     await expect(() => {
-      return registerUserCase.execute(userRegisterData);
+      return sut.execute(userRegisterData);
     }).rejects.toBeInstanceOf(UserAlreadyExistsError);
   });
 });
