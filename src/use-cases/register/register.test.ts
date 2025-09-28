@@ -3,7 +3,7 @@ import { compare } from 'bcryptjs';
 
 import { RegisterUseCase } from '.';
 
-import { InMemoryUsersRepository } from 'repositories/in-memory/users-repository';
+import { InMemoryUsersRepository } from 'repositories/in-memory/in-memory-users-repository';
 import { UserAlreadyExistsError } from 'errors/user-already-exists';
 
 const userRegisterData = {

@@ -1,5 +1,5 @@
 import { Prisma, User } from '@prisma/client';
-import { IUsersRepository } from '../interfaces/IUsersRepository';
+import { IUsersRepository } from '../interfaces/users-repository-interface';
 import { ulid } from 'ulidx';
 
 export class InMemoryUsersRepository implements IUsersRepository {

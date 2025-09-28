@@ -1,7 +1,7 @@
 import { CheckIn } from '@prisma/client';
 import { PermissionsInvalidError } from 'errors/permissions-invalid';
-import { ICheckInsRepository } from 'repositories/interfaces/CheckInsRepository';
-import { IUsersRepository } from 'repositories/interfaces/IUsersRepository';
+import { ICheckInsRepository } from 'repositories/interfaces/check-ins-repository-interface';
+import { IUsersRepository } from 'repositories/interfaces/users-repository-interface';
 
 interface CheckInsUseCaseRequest {
   userId: string;

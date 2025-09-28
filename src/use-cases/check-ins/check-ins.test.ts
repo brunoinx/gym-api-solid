@@ -1,8 +1,8 @@
 import { describe, expect, it, beforeEach, vi, afterEach } from 'vitest';
 
-import { InMemoryCheckInsRepository } from 'repositories/in-memory/check-ins-repository';
+import { InMemoryCheckInsRepository } from 'repositories/in-memory/in-memory-check-ins-repository';
 import { CheckInsUseCase } from '.';
-import { InMemoryUsersRepository } from 'repositories/in-memory/users-repository';
+import { InMemoryUsersRepository } from 'repositories/in-memory/in-memory-users-repository';
 import { hash } from 'bcryptjs';
 import { PermissionsInvalidError } from 'errors/permissions-invalid';
 
