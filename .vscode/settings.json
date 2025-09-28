@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["datasource", "Gympass", "sqlite", "treeify"],
+  "cSpell.words": ["datasource", "Gympass", "sqlite", "treeify", "ulidx"],
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
