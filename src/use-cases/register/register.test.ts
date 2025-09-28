@@ -2,6 +2,7 @@ import { describe, expect, it, beforeEach } from 'vitest';
 import { compare } from 'bcryptjs';
 
 import { RegisterUseCase } from '.';
+
 import { InMemoryUsersRepository } from 'repositories/in-memory/users-repository';
 import { UserAlreadyExistsError } from 'errors/user-already-exists';
 
