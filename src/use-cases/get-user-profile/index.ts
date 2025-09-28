@@ -1,5 +1,5 @@
 import { ResourceNotFoundError } from 'errors/resource-not-found';
-import { IUsersRepository, UserPublic } from 'repositories/IUsersRepository';
+import { IUsersRepository, UserPublic } from 'repositories/interfaces/IUsersRepository';
 
 interface GetUserProfileUseCaseRequest {
   userId: string;
