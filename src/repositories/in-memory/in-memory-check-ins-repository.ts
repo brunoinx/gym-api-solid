@@ -1,7 +1,7 @@
 import { CheckIn, Prisma } from '@prisma/client';
 import { ulid } from 'ulidx';
-import { ICheckInsRepository } from 'repositories/interfaces/check-ins-repository-interface';
 import dayjs from 'dayjs';
+import { ICheckInsRepository } from 'repositories/interfaces/check-ins-repository-interface';
 
 export class InMemoryCheckInsRepository implements ICheckInsRepository {
   public items: CheckIn[] = [];
@@ -19,6 +19,10 @@ export class InMemoryCheckInsRepository implements ICheckInsRepository {
     this.items.push(checkIn);
 
     return checkIn;
+  }
+
+  async findManyByUserId(userId: string, page: number) {
+    return this.items.filter(item => item.user_id === userId).slice((page - 1) * 20, page * 20);
   }
 
   async findByUserIdOnDate(userId: string, date: Date) {
