@@ -19,9 +19,9 @@ export class PrismaUsersRepository implements IUsersRepository {
     return user;
   }
 
-  async findById(userId: string) {
+  async findById(id: string) {
     const user = await prisma.user.findUnique({
-      where: { id: userId },
+      where: { id },
     });
 
     return user;
