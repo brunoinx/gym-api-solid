@@ -94,7 +94,7 @@ describe('Check-in Use Case', () => {
     expect(checkIn.id).toEqual(expect.any(String));
   });
 
-  it('should not be able to check for ADMIN Role users', async () => {
+  it('should not be able to check-in for ADMIN Role users', async () => {
     const createdUser = await usersRepository.create({
       name: 'John Doe',
       email: 'john.doe@mail.com',
@@ -111,8 +111,6 @@ describe('Check-in Use Case', () => {
       });
     }).rejects.toBeInstanceOf(PermissionsInvalidError);
   });
-
-  it.todo('should be validate check-in only for ADMIN Role users', () => {});
 
   it('should not be able to check in on distant gym', async () => {
     gymsRepository.create({
