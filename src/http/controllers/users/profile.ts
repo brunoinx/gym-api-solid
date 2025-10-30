@@ -5,7 +5,6 @@ export async function profileController(request: FastifyRequest, reply: FastifyR
   const getUserProfileUseCase = makeGetUserProfileUseCase();
 
   const { user } = await getUserProfileUseCase.execute({
-    // @ts-expect-error sub is a string
     userId: request.user.sub,
   });
 
