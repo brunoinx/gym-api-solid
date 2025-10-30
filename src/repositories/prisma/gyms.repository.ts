@@ -1,9 +1,10 @@
-import { Gym, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { prisma } from 'lib/prisma';
 import {
   FindManyNearbyParams,
   IGymsRepository,
 } from 'repositories/interfaces/gyms-repository-interface';
+import { getDistanceBetweenCoordinates } from 'utils/get-distance-between-coordinates';
 
 export class PrismaGymsRepository implements IGymsRepository {
   async create(data: Prisma.GymCreateInput) {
@@ -38,11 +39,23 @@ export class PrismaGymsRepository implements IGymsRepository {
 
   // Busca os gyms no raio de 10km
   async findManyNearby({ latitude, longitude }: FindManyNearbyParams) {
-    const gyms = await prisma.$queryRaw<Gym[]>`
-      SELECT * FROM gyms
-      WHERE ( 6371 * acos( cos( radians(${latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${longitude}) ) + sin( radians(${latitude}) ) * sin( radians( latitude ) ) ) ) <= 10
-    `;
+    // TODO: Só funciona em MySQL ou PostgreSQL;
+    // const gyms = await prisma.$queryRaw<Gym[]>`
+    //   SELECT * FROM gyms
+    //   WHERE ( 6371 * acos( cos( radians(${latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${longitude}) ) + sin( radians(${latitude}) ) * sin( radians( latitude ) ) ) ) <= 10
+    // `;
 
-    return gyms;
+    const gyms = await prisma.gym.findMany();
+
+    const nearbyGyms = gyms.filter(gym => {
+      const distance = getDistanceBetweenCoordinates(
+        { latitude, longitude },
+        { latitude: gym.latitude.toNumber(), longitude: gym.longitude.toNumber() },
+      );
+
+      return distance < 10;
+    });
+
+    return nearbyGyms;
   }
 }
