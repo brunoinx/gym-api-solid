@@ -1,4 +1,3 @@
-import { Gym, Prisma } from '@prisma/client';
 import { ulid } from 'ulidx';
 
 import {
@@ -6,6 +5,7 @@ import {
   IGymsRepository,
 } from 'repositories/interfaces/gyms-repository-interface';
 import { getDistanceBetweenCoordinates } from 'utils/get-distance-between-coordinates';
+import { Gym, Prisma } from '../../../generated/prisma/client';
 
 export class InMemoryGymsRepository implements IGymsRepository {
   public items: Gym[] = [];

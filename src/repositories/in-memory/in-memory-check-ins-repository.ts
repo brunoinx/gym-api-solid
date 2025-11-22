@@ -1,7 +1,7 @@
-import { CheckIn, Prisma } from '@prisma/client';
 import { ulid } from 'ulidx';
 import dayjs from 'dayjs';
 import { ICheckInsRepository } from 'repositories/interfaces/check-ins-repository-interface';
+import { CheckIn, Prisma } from '../../../generated/prisma/client';
 
 export class InMemoryCheckInsRepository implements ICheckInsRepository {
   public items: CheckIn[] = [];

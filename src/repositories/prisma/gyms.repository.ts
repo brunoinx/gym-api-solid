@@ -1,10 +1,10 @@
-import { Prisma } from '@prisma/client';
 import { prisma } from 'lib/prisma';
 import {
   FindManyNearbyParams,
   IGymsRepository,
 } from 'repositories/interfaces/gyms-repository-interface';
 import { getDistanceBetweenCoordinates } from 'utils/get-distance-between-coordinates';
+import { Prisma } from '../../../generated/prisma/client';
 
 export class PrismaGymsRepository implements IGymsRepository {
   async create(data: Prisma.GymCreateInput) {

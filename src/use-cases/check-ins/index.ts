@@ -1,4 +1,3 @@
-import { CheckIn } from '@prisma/client';
 import { MaxDistanceError } from 'errors/max-distance-error';
 import { MaxNumberOfCheckInsError } from 'errors/max-number-of-checkIns';
 import { PermissionsInvalidError } from 'errors/permissions-invalid';
@@ -7,6 +6,7 @@ import { ICheckInsRepository } from 'repositories/interfaces/check-ins-repositor
 import { IGymsRepository } from 'repositories/interfaces/gyms-repository-interface';
 import { IUsersRepository } from 'repositories/interfaces/users-repository-interface';
 import { getDistanceBetweenCoordinates } from 'utils/get-distance-between-coordinates';
+import { CheckIn } from '../../../generated/prisma/client';
 
 const MAX_DISTANCE_IN_KM = 0.1; // 100m
 
