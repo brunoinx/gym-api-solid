@@ -1,9 +1,9 @@
-import { CheckIn } from '@prisma/client';
 import dayjs from 'dayjs';
 import { LateCheckInValidationError } from 'errors/late-check-in-validation-error';
 import { ResourceNotFoundError } from 'errors/resource-not-found';
 import { ICheckInsRepository } from 'repositories/interfaces/check-ins-repository-interface';
 import { IUsersRepository } from 'repositories/interfaces/users-repository-interface';
+import { CheckIn } from '../../../generated/prisma/client';
 
 interface ValidateCheckInUseCaseRequest {
   checkInId: string;

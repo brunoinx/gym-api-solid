@@ -1,14 +1,10 @@
 generator client {
-  provider = "prisma-client-js"
-}
-
-generator erd {
-  provider = "prisma-erd-generator"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
 }
 
 enum Role {
@@ -17,53 +13,41 @@ enum Role {
 }
 
 model User {
-  id            String   @id @default(ulid())
-  name          String
-  email         String   @unique
-  password_hash String
-  role          Role     @default(MEMBER) // Todo usuário novo é um membro por padrão.
-  created_at    DateTime @default(now())
-
+  id                String    @id @default(ulid())
+  name              String
+  email             String    @unique
+  password_hash     String
+  role              Role      @default(MEMBER)
+  created_at        DateTime  @default(now())
+  validatedCheckIns CheckIn?  @relation("AdminValidatedCheckIns")
   checkIns          CheckIn[] @relation("UsersCheckIns")
-  validatedCheckIns CheckIn[] @relation("AdminValidatedCheckIns")
 
   @@map("users")
 }
 
 model Gym {
-  id          String   @id @default(ulid())
+  id          String    @id @default(ulid())
   name        String
   description String?
   phone       String?
   latitude    Decimal
   longitude   Decimal
-  created_at  DateTime @default(now())
-
-  checkIns CheckIn[]
+  created_at  DateTime  @default(now())
+  checkIns    CheckIn[]
 
   @@map("gyms")
 }
 
 model CheckIn {
-  id           String    @id @default(ulid())
-  createdAt    DateTime  @default(now())
-  validated_at DateTime?
-
-  // Foreign keys
+  id              String    @id @default(ulid())
+  createdAt       DateTime  @default(now())
+  validated_at    DateTime?
   user_id         String
   gym_id          String
-  validated_by_id String? @unique
-
-  // Relacionamento 0: O check-in foi feito em uma academia.
-  gym Gym @relation(fields: [gym_id], references: [id])
-
-  // Relacionamento 1: O usuário criou o check-in.
-  // Conecta-se à relação "UserCheckIns".
-  user User @relation("UsersCheckIns", fields: [user_id], references: [id])
-
-  // Relacionamento 2: O admin validou o check-in.
-  // Conecta-se à relação "AdminValidatedCheckIns".
-  admin User? @relation("AdminValidatedCheckIns", fields: [validated_by_id], references: [id])
+  validated_by_id String?   @unique
+  admin           User?     @relation("AdminValidatedCheckIns", fields: [validated_by_id], references: [id])
+  user            User      @relation("UsersCheckIns", fields: [user_id], references: [id])
+  gym             Gym       @relation(fields: [gym_id], references: [id])
 
   @@map("check_ins")
 }
