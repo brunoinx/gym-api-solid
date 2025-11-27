@@ -10,7 +10,7 @@ export async function refreshController(request: FastifyRequest, reply: FastifyR
       .send({ message: 'Refresh Token inválido ou ausente. Faça login novamente.' });
   }
 
-  const newAccessPayload = { sub: request.user.sub };
+  const newAccessPayload = { sub: request.user.sub, role: request.user.role };
 
   const newAccessToken = await reply.jwtSign(newAccessPayload, { sign: { expiresIn: '15m' } });
 

@@ -18,7 +18,9 @@ export async function authenticateController(request: FastifyRequest, reply: Fas
     const { user } = await authenticateUseCase.execute({ email, password });
 
     const accessToken = await reply.jwtSign(
-      {},
+      {
+        role: user.role,
+      },
       {
         sign: {
           sub: user.id,
@@ -27,7 +29,9 @@ export async function authenticateController(request: FastifyRequest, reply: Fas
     );
 
     const refreshToken = await reply.jwtSign(
-      {},
+      {
+        role: user.role,
+      },
       {
         sign: {
           sub: user.id,
@@ -52,6 +56,4 @@ export async function authenticateController(request: FastifyRequest, reply: Fas
 
     throw error;
   }
-
-  return reply.status(200).send();
 }
